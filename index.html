@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>数据大屏</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+
+<body>
+	<header>
+		配电终端在线监测平台数据统计
+		<span id=localtime style=" font-size:14px; position: absolute; right: 30px; "></span>
+	</header>
+	<div id="content">
+
+		<div class="content_center">
+			<div class="center_top">
+				<div class="title"><img src="images/icon03.png" /> 平台数据分布</div>
+				<div class="center_top_con" id="distribution_map">
+				</div>
+			</div>
+			<div class="center_top center_top1">
+				<div class="title"><img src="images/icon03.png" /> 配电所数据</div>
+				<div class="center_top_con" id="distribution_map1">
+					<!-- <embed src="svg/采样点.svg" width="700" height="410" 
+						type="image/svg+xml"
+						pluginspage="http://www.adobe.com/svg/viewer/install/" /> -->
+					<img src="svg/1.png" alt=""/>
+				</div>
+			</div>
+			<div class="center_bot">
+				<table class="panel-table" bordercolor="#0d48e0" border="1">
+					<thead bgcolor="#0e4ae0" align="center">
+						<tr>
+							<th colspan="6"><img src="images/icon04.png" /> 监控列表</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="aaa" align="center">
+							<td v-for="item in factoryHeader" style="color: #00fcff; padding: 5px 0;">
+								{{ item.categories }}</td>
+						</tr>
+						<tr v-for="y in factory.slice(0,6)" class="aaa" align="center">
+							<td>{{ y.company }}</td>
+							<td>{{ y.dtuCnt }}</td>
+							<td>{{ y.plcCnt }}</td>
+							<td>{{ y.dataCnt }}</td>
+							<td>{{ y.alarm }}</td>
+							<td width="250">
+								<button class="b1 click_pop">报警记录</button>
+								<button class="b2 click_pop2">历史数据</button>
+								<button class="b3 click_pop3">组态应用</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="panel-table" bordercolor="#0d48e0" border="1">
+					<thead bgcolor="#0e4ae0" align="center">
+						<tr>
+							<th colspan="6"><img src="images/icon04.png" /> 监控列表</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="aaa" align="center">
+							<td v-for="item in factoryHeader" style="color: #00fcff; padding: 5px 0;">
+								{{ item.categories }}</td>
+						</tr>
+						<tr v-for="y in factory.slice(0,6)" class="aaa" align="center">
+							<td>{{ y.company }}</td>
+							<td>{{ y.dtuCnt }}</td>
+							<td>{{ y.plcCnt }}</td>
+							<td>{{ y.dataCnt }}</td>
+							<td>{{ y.alarm }}</td>
+							<td width="250">
+								<button class="b1 click_pop">报警记录</button>
+								<button class="b2 click_pop2">历史数据</button>
+								<button class="b3 click_pop3">组态应用</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="content_right">
+			<div class="report">
+				<div class="report1">
+					<p>告警信息</p>
+					<small>{{alarm.alarm}}条</small>
+				</div>
+				<div class="report2">
+					<p>故障信息</p>
+					<small>{{alarm.fault}} 条</small>
+				</div>
+			</div>
+			<div class="news_report">
+				<div class="title"><img src="images/icon05.png" /> 报警记录</div>
+				<div class="news_list">
+					<ul>
+						<li v-for="item in almMsg.slice(0,3)" class="li02">
+							{{ item.msg }}
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="data_box">
+				<div class="title"><img src="images/icon06.png" /> 数据记录</div>
+				<div class="data_con" id="container4">
+					展示数据1
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(function () {
+			var width = document.documentElement.clientWidth;
+			var height = document.documentElement.clientHeight;
+			$('#content').height(height-70);
+			var center = $('.content_center').width();
+			$('.center_top').width((center-115)/2);
+			$('.center_bot').width(center-55);
+			$('.content_right').width(width-$('.content_center').width()-60);
+			$('.news_report').height($('.center_top').height()-145-20)
+			$('.data_box').height($('.content_right').height()-145-20-$('.news_report').height()-20-40);
+		});
+	</script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/echarts.min.js"></script>
+	<script type="text/javascript" src="js/china.js"></script>
+	<script type="text/javascript" src="js/vue.min.js"></script>
+	<script type="text/javascript" src="js/map.js"></script>
+	<script type="text/javascript" src="js/times.js"></script>
+	<script type="text/javascript" src="js/DTU.js"></script>
+	<script type="text/javascript" src="js/PLC.js"></script>
+	<script type="text/javascript" src="js/online.js"></script>
+	<script type="text/javascript" src="js/industry.js"></script>
+	<script type="text/javascript" src="js/data.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript"
+		src="http://api.map.baidu.com/getscript?v=2.0&ak=ve8mZuogbzrzE8gYPHosqDTMvkEuoapx&services=&t=20180823194355"></script>
+</body>
+
+</html>
